@@ -34,10 +34,8 @@ group :development do
 end
 
 group :test do
-  gem "factory_girl_rails"
-  gem "shoulda-matchers", "~> 3.1"
-  gem "coveralls", require: false
-  gem "database_cleaner"
+  gem 'factory_girl_rails'
+  gem 'shoulda-matchers', '~> 3.1'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
