@@ -8,3 +8,8 @@ before_script:
 script:
   - bin/rails db:setup RAILS_ENV=test
   - bundle exec rspec
+addons:
+  code_climate:
+    repo_token: ENV["codeclimate_repo_token"]
+after_success:
+  - bundle exec codeclimate-test-reporter
