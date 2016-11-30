@@ -15,6 +15,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'jwt'
 gem 'faker'
 gem 'active_model_serializers'
+gem 'pry-rails'
 
 
 # Use Capistrano for deployment

@@ -8,8 +8,6 @@ class AuthenticationService
     JsonWebToken.encode(user_id: user.id)
   rescue ActiveRecord::RecordInvalid
     raise
-  rescue ActiveModel::UnknownAttributeError
-    raise
   end
 
   def login
