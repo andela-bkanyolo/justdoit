@@ -10,7 +10,6 @@ class User < ApplicationRecord
             presence: true,
             length: { maximum: 255 },
             format: { with: VALID_EMAIL }
-  has_many :bookings
 
   has_secure_password
 end
