@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   def create
     data = {
       message: Messages.user_created,
-      auth_token: authentication_service.create_user.token
+      auth_token: authentication_service.signup.token
     }
     render_json(data, :created)
   end

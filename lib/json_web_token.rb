@@ -7,7 +7,9 @@ class JsonWebToken
   def self.decode(token)
     body = JWT.decode(token, Rails.application.secrets.secret_key_base).first
     HashWithIndifferentAccess.new(body)
-  rescue JWT::ExpiredSignature => e
-    raise ExceptionHandler::ExpiredSignature, e.message
+  rescue JWT::ExpiredSignature
+    raise(ExceptionHandler::NotAuthorized, Messages.expired_token)
+  rescue JWT::VerificationError, JWT::DecodeError
+    raise(ExceptionHandler::NotAuthorized, Messages.invalid_token)
   end
 end

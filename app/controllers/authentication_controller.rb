@@ -1,4 +1,6 @@
 class AuthenticationController < ApplicationController
+  skip_before_action :authorize_request, only: :login
+
   def login
     data = {
       message: Messages.user_logged_in,
@@ -9,8 +11,6 @@ class AuthenticationController < ApplicationController
 
   def logout
     authentication_service.logout(token)
-    @current_user = nil
-
     data = { message: Messages.user_logged_out }
     render_json(data)
   end
