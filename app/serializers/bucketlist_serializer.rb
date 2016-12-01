@@ -4,6 +4,6 @@ class BucketlistSerializer < ActiveModel::Serializer
   attributes :id, :name, :date_created, :date_modified, :created_by
 
   def created_by
-    user_id
+    object.user.id
   end
 end
