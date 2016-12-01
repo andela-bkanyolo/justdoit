@@ -28,21 +28,26 @@ RSpec.describe AuthenticationController, type: :controller do
   end
 
   describe 'GET #logout' do
-    let(:user) { create(:user) }
-
     context 'when authorization succeeds' do
+      let(:user) { create(:user) }
+      let(:headers) { auth_headers }
+
       before(:each) do
-        get :logout, params: {test: "test"}
-        request.headers["authorization"] = auth_headers["authorization"]
+        request.headers.merge! headers
+        get :logout
       end
 
-      it {binding.pry}
-
       it_behaves_like('a http response', 200, Messages.user_logged_out)
+
+      it 'removes the token from the database' do
+        user_tokens = user.tokens.pluck(:token)
+        expect(user_tokens).to_not include(headers[:authorization])
+      end
     end
 
     context 'when authorization fails' do
       before(:each) do
+        request.headers.merge! invalid_auth_headers
         get :logout
       end
 
