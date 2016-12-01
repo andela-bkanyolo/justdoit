@@ -11,7 +11,7 @@ RSpec.describe AuthenticationController, type: :controller do
         }
       end
 
-      it_behaves_like('a http response', 200, 'Successfully logged in')
+      it_behaves_like('a http response', 200, Messages.user_logged_in)
 
       it 'returns an authentication token' do
         expect(json['auth_token']).not_to be_nil
@@ -20,14 +20,36 @@ RSpec.describe AuthenticationController, type: :controller do
 
     context 'when params are invalid' do
       before(:each) do
-        post :login, params: {}
+        post :login
       end
 
-      it_behaves_like(
-        'a http response',
-        401,
-        'Log in email or password incorrect'
-      )
+      it_behaves_like('a http response', 401, Messages.user_not_logged_in)
+    end
+  end
+
+  describe 'GET #logout' do
+    context 'when authorization token is included' do
+      let(:user) { create(:user) }
+      let(:headers) { auth_headers }
+
+      before(:each) do
+        request.headers.merge! headers
+        get :logout
+      end
+
+      it_behaves_like('a http response', 200, Messages.user_logged_out)
+
+      it 'removes the token from the database' do
+        user_tokens = user.tokens.pluck(:token)
+        expect(user_tokens).to_not include(headers[:authorization])
+      end
+    end
+
+    include_context 'when authorization token is not included' do
+      before do
+        request.headers.merge! invalid_auth_headers
+        get :logout
+      end
     end
   end
 end

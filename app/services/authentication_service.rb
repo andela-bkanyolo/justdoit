@@ -3,7 +3,7 @@ class AuthenticationService
     @user_details = user_details
   end
 
-  def create_user
+  def signup
     user = User.create!(@user_details)
     login(user)
   rescue ActiveRecord::RecordInvalid
@@ -19,6 +19,7 @@ class AuthenticationService
     end
   end
 
-  def logout
+  def logout(token)
+    Token.find_by(token: token).destroy
   end
 end
