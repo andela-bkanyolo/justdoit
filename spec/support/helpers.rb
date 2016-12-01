@@ -17,7 +17,7 @@ module Helpers
     }
   end
 
-  def auth_headers
+  def auth_headers(user)
     default_headers.merge(authorization: token(user).token)
   end
 

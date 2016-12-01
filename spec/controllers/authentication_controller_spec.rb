@@ -30,10 +30,10 @@ RSpec.describe AuthenticationController, type: :controller do
   describe 'GET #logout' do
     context 'when authorization token is included' do
       let(:user) { create(:user) }
-      let(:headers) { auth_headers }
+      let(:header) { auth_headers(user) }
 
       before(:each) do
-        request.headers.merge! headers
+        request.headers.merge! header
         get :logout
       end
 
@@ -41,13 +41,12 @@ RSpec.describe AuthenticationController, type: :controller do
 
       it 'removes the token from the database' do
         user_tokens = user.tokens.pluck(:token)
-        expect(user_tokens).to_not include(headers[:authorization])
+        expect(user_tokens).to_not include(header[:authorization])
       end
     end
 
     include_context 'when authorization token is not included' do
       before do
-        request.headers.merge! invalid_auth_headers
         get :logout
       end
     end
