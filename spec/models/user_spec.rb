@@ -16,4 +16,6 @@ RSpec.describe User, type: :model do
   it { is_expected.to validate_length_of(:email).is_at_most(255) }
   it { is_expected.to allow_value("valid@email.com").for(:email) }
   it { is_expected.to_not allow_value("invalid_email").for(:email) }
+
+  it { is_expected.to have_many(:tokens) }
 end

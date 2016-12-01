@@ -10,6 +10,7 @@ class User < ApplicationRecord
             presence: true,
             length: { maximum: 255 },
             format: { with: VALID_EMAIL }
+  has_many :tokens
 
   has_secure_password
 end
