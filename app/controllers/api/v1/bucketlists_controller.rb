@@ -4,7 +4,8 @@ module Api
       before_action :set_bucket_lists
 
       def index
-        render_json(paginate)
+        list = search || paginate
+        render_json(list)
       end
 
       def create
@@ -20,6 +21,15 @@ module Api
 
       def set_bucket_lists
         @bucketlists = current_user.bucketlists
+      end
+
+      def search
+        if params[:q] && @bucketlists
+          @bucketlists.search(params[:q]).paginate(
+            params[:limit],
+            params[:page]
+          )
+        end
       end
 
       def paginate
