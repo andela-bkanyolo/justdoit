@@ -7,6 +7,14 @@ class AuthenticationController < ApplicationController
     render_json(data)
   end
 
+  def logout
+    authentication_service.logout(token)
+    @current_user = nil
+
+    data = { message: Messages.user_logged_out }
+    render_json(data)
+  end
+
   private
 
   def authentication_service

@@ -19,6 +19,7 @@ class AuthenticationService
     end
   end
 
-  def logout
+  def logout(token)
+    Token.find_by(token: token).destroy
   end
 end

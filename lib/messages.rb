@@ -14,4 +14,8 @@ class Messages
   def self.user_not_logged_in
     'Log in email or password incorrect'
   end
+
+  def self.user_logged_out
+    'Successfully logged out'
+  end
 end
