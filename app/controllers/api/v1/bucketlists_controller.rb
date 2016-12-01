@@ -1,6 +1,6 @@
-module API
+module Api
   module V1
-    class Api::V1::BucketlistsController < ApplicationController
+    class BucketlistsController < ApplicationController
       def create
         bucketlist = @current_user.bucketlists.create!(bucketlist_params)
         render_json(bucketlist, :created)
