@@ -18,4 +18,5 @@ RSpec.describe User, type: :model do
   it { is_expected.to_not allow_value("invalid_email").for(:email) }
 
   it { is_expected.to have_many(:tokens) }
+  it { is_expected.to have_many(:bucketlists) }
 end
