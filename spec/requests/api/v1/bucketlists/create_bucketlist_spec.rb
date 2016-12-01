@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Create a bucketlist', type: :request do
   let(:user) { create(:user) }
-  let(:params) { attributes_for(:bucketlist) }
+  let(:params) { attributes_for(:bucketlist, user: user) }
   let(:header) { auth_headers(user) }
 
   let!(:request) {
