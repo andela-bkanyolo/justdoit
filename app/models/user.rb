@@ -11,6 +11,7 @@ class User < ApplicationRecord
             length: { maximum: 255 },
             format: { with: VALID_EMAIL }
   has_many :tokens
+  has_many :bucketlists
 
   has_secure_password
 end
