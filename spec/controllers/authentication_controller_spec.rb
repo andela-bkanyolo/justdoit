@@ -28,7 +28,7 @@ RSpec.describe AuthenticationController, type: :controller do
   end
 
   describe 'GET #logout' do
-    context 'when authorization succeeds' do
+    context 'when authorization token is included' do
       let(:user) { create(:user) }
       let(:headers) { auth_headers }
 
@@ -45,13 +45,11 @@ RSpec.describe AuthenticationController, type: :controller do
       end
     end
 
-    context 'when authorization fails' do
-      before(:each) do
+    include_context 'when authorization token is not included' do
+      before do
         request.headers.merge! invalid_auth_headers
         get :logout
       end
-
-      it_behaves_like('a http response', 401, Messages.missing_token)
     end
   end
 end
