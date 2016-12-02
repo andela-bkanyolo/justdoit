@@ -25,7 +25,7 @@ module Api
       def destroy
         @bucketlist.destroy
         data = {
-          messsage: Messages.resource_deleted('Bucketlist')
+          message: Messages.resource_deleted('Bucketlist')
         }
         render_json(data)
       end
