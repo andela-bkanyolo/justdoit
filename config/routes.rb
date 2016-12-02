@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   namespace :api, path: '/', defaults: { format: :json } do
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
-      resources :bucketlists, except: [:new, :edit]
+      resources :bucketlists, except: [:new, :edit] do
+        resources :items, except: [:new, :edit]
+      end
     end
   end
 

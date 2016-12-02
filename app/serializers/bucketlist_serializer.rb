@@ -1,7 +1,8 @@
 class BucketlistSerializer < ActiveModel::Serializer
   include DateFormat
 
-  attributes :id, :name, :date_created, :date_modified, :created_by
+  attributes :id, :name, :items, :date_created, :date_modified, :created_by
+  has_many :items
 
   def created_by
     object.user.id
