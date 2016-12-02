@@ -1,17 +1,13 @@
 module ExceptionHandler
   extend ActiveSupport::Concern
 
-  class ExpiredSignature < StandardError; end
   class AccessDenied < StandardError; end
-  class NotAuthenticated < StandardError; end
   class UserNotFound < StandardError; end
   class NotAuthorized < StandardError; end
 
   included do
-    rescue_from ExceptionHandler::ExpiredSignature, with: :access_denied
     rescue_from ExceptionHandler::AccessDenied, with: :access_denied
     rescue_from ExceptionHandler::NotAuthorized, with: :access_denied
-    rescue_from ExceptionHandler::NotAuthenticated, with: :access_denied
     rescue_from ExceptionHandler::UserNotFound, with: :user_not_found
 
     rescue_from ActiveRecord::RecordInvalid do |e|

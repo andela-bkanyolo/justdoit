@@ -11,9 +11,13 @@ module Helpers
     JsonWebToken.encode({ user_id: user.id }, (Time.now.to_i - 10))
   end
 
+  def invalid_user_token(id)
+    JsonWebToken.encode({ user_id: id }, (Time.now.to_i + 10))
+  end
+
   def default_headers
     {
-      accept: "application/vnd.justdoit.v1+json"
+      accept: 'application/vnd.justdoit.v1+json'
     }
   end
 
@@ -21,7 +25,7 @@ module Helpers
     default_headers.merge(authorization: token(user).token)
   end
 
-  def invalid_headers
-    default_headers.merge(authorization: nil)
+  def invalid_headers(token = nil)
+    default_headers.merge(authorization: token)
   end
 end
