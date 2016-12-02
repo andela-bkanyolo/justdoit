@@ -3,11 +3,12 @@ require 'rails_helper'
 RSpec.describe 'Create an item', type: :request do
   let!(:user) { create(:user) }
   let!(:bucket) { create(:bucketlist, user: user) }
+  let!(:bucket_id) { bucket.id }
   let(:params) { attributes_for(:item, bucketlist: bucket) }
   let(:header) { valid_headers(user) }
 
   let!(:request) do
-    post "/bucketlists/#{bucket.id}/items", params: params, headers: header
+    post "/bucketlists/#{bucket_id}/items", params: params, headers: header
   end
 
   context 'when bucketlist id exists for that user' do
@@ -34,17 +35,10 @@ RSpec.describe 'Create an item', type: :request do
     end
   end
 
-  context 'when bucketlist id does not exist for that user' do
-    let!(:request) do
-      post "/bucketlists/-1/items", params: params, headers: header
-    end
-
-    it_behaves_like(
-      'a http response',
-      404,
-      Messages.resource_not_found('bucketlist')
-    )
-  end
-
-  it_behaves_like 'an unathorized response'
+  include_context(
+    'when resource id does not exist for that user',
+    'bucketlist',
+    bucket_id: -1
+  )
+  include_context 'when authorization token is not included'
 end

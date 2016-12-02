@@ -66,5 +66,5 @@ RSpec.describe 'List all bucketlists', type: :request do
     end
   end
 
-  it_behaves_like 'an unathorized response'
+  include_context 'when authorization token is not included'
 end
