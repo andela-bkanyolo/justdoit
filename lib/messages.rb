@@ -38,4 +38,8 @@ class Messages
   def self.resource_not_found(resource)
     "Specified #{resource} was not found"
   end
+
+  def self.resource_deleted(resource)
+    "#{resource} successfully deleted"
+  end
 end

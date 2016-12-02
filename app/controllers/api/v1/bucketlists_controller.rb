@@ -22,6 +22,14 @@ module Api
         render_json(@bucketlist)
       end
 
+      def destroy
+        @bucketlist.destroy
+        data = {
+          messsage: Messages.resource_deleted('Bucketlist')
+        }
+        render_json(data)
+      end
+
       private
 
       def bucketlist_params
