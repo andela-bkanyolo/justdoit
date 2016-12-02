@@ -1,7 +1,8 @@
 module Api
   module V1
     class ItemsController < ApplicationController
-      before_action :set_items, only: [:index, :create]
+      before_action :set_items
+      before_action :set_item, only: [:show, :update, :destroy]
 
       def index
         render_json(search || paginate)
@@ -12,10 +13,20 @@ module Api
         render_json(item, :created)
       end
 
+      def show
+        render_json(@item)
+      end
+
       private
 
       def item_params
         params.permit(:name, :done)
+      end
+
+      def set_item
+        @items.find(params[:id])
+      rescue ActiveRecord::RecordNotFound => e
+        raise e, Messages.resource_not_found('item')
       end
 
       def set_items
