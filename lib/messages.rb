@@ -34,4 +34,8 @@ class Messages
   def self.invalid_token
     'Invalid authorization token'
   end
+
+  def self.resource_not_found(resource)
+    "Specified #{resource} was not found"
+  end
 end
