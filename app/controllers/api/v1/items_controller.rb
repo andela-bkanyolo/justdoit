@@ -17,6 +17,11 @@ module Api
         render_json(@item)
       end
 
+      def update
+        @item.update!(item_params)
+        render_json(@item)
+      end
+
       private
 
       def item_params
