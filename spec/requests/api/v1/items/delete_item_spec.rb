@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Show a bucketlists item', type: :request do
+RSpec.describe 'Delete a bucketlist item', type: :request do
   let!(:user) { create(:user) }
   let!(:bucket) { create(:bucketlist, user: user) }
   let!(:bucket_id) { bucket.id }
@@ -8,16 +8,19 @@ RSpec.describe 'Show a bucketlists item', type: :request do
   let(:id) { item.id }
   let(:header) { valid_headers(user) }
 
-  let!(:request) { get "/bucketlists/#{bucket_id}/items/#{id}", params: {}, headers: header }
+  let!(:request) { delete "/bucketlists/#{bucket_id}/items/#{id}", params: {}, headers: header }
   subject { response }
 
   context 'when bucketlist id exists for that user' do
     context 'when bucketlist item id exists' do
-      it_behaves_like('a http response', 200)
+      it_behaves_like(
+        'a http response',
+        200,
+        Messages.resource_deleted('Item')
+      )
 
-      it 'returns the queried bucketlist item' do
-        expect(json['name']).to eq item.name
-        expect(json['id']).to eq item.id
+      it 'Deletes the provided bucketlist item' do
+        expect(bucket.items).to_not include item
       end
     end
   end
