@@ -25,7 +25,9 @@ module Api
       end
 
       def set_bucket_list
-        @bucketlist = current_user.bucketlists.find_by(id: params[:id])
+        @bucketlist = current_user.bucketlists.find(params[:id])
+      rescue ActiveRecord::RecordNotFound => e
+        raise e, Messages.resource_not_found('bucketlist')
       end
 
       def set_bucket_lists
