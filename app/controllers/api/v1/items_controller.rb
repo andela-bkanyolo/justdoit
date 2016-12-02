@@ -24,7 +24,7 @@ module Api
       end
 
       def set_item
-        @items.find(params[:id])
+        @item = @items.find(params[:id])
       rescue ActiveRecord::RecordNotFound => e
         raise e, Messages.resource_not_found('item')
       end
