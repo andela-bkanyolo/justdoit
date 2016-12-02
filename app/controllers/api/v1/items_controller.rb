@@ -22,6 +22,14 @@ module Api
         render_json(@item)
       end
 
+      def destroy
+        @item.destroy
+        data = {
+          message: Messages.resource_deleted('Item')
+        }
+        render_json(data)
+      end
+
       private
 
       def item_params
