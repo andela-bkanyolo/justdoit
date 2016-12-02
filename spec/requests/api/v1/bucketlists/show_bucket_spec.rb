@@ -9,7 +9,7 @@ RSpec.describe 'Show a bucketlist', type: :request do
   let!(:request) { get "/bucketlists/#{id}", params: {}, headers: header }
   subject { response }
 
-  context 'when id exists for that user' do
+  context 'when bucketlist id exists for that user' do
     it_behaves_like('a http response', 200)
 
     it 'returns the provided bucketlist' do
@@ -18,7 +18,7 @@ RSpec.describe 'Show a bucketlist', type: :request do
     end
   end
 
-  context 'when id does not exist for that user' do
+  context 'when bucketlist id does not exist for that user' do
     let(:id) { -1 }
 
     it_behaves_like(

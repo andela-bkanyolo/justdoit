@@ -1,12 +1,11 @@
 module Api
   module V1
     class BucketlistsController < ApplicationController
-      before_action :set_bucket_list, only: :show
-      before_action :set_bucket_lists
+      before_action :set_bucket_list, only: [:show, :update, :destroy]
+      before_action :set_bucket_lists, only: [:index, :create]
 
       def index
-        list = search || paginate
-        render_json(list)
+        render_json(search || paginate)
       end
 
       def create

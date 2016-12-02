@@ -58,7 +58,7 @@ RSpec.describe 'List all bucketlists', type: :request do
   context 'when the user has no bucketlists' do
     before(:each) do
       user.bucketlists.destroy_all
-      get "/bucketlists", params: params, headers: header
+      get '/bucketlists', params: params, headers: header
     end
 
     it 'returns zero items' do
