@@ -27,14 +27,13 @@ RSpec.describe AuthenticationController, type: :controller do
     end
   end
 
-  describe 'GET #logout' do
+  describe 'GET #logout', type: :request do
     context 'when authorization token is included' do
       let(:user) { create(:user) }
-      let(:header) { auth_headers(user) }
+      let(:header) { valid_headers(user) }
 
       before(:each) do
-        request.headers.merge! header
-        get :logout
+        get '/auth/logout', headers: header
       end
 
       it_behaves_like('a http response', 200, Messages.user_logged_out)
@@ -47,7 +46,7 @@ RSpec.describe AuthenticationController, type: :controller do
 
     include_context 'when authorization token is not included' do
       before do
-        get :logout
+        get '/auth/logout'
       end
     end
   end

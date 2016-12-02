@@ -17,11 +17,11 @@ module Helpers
     }
   end
 
-  def auth_headers(user)
+  def valid_headers(user)
     default_headers.merge(authorization: token(user).token)
   end
 
-  def invalid_auth_headers
+  def invalid_headers
     default_headers.merge(authorization: nil)
   end
 end

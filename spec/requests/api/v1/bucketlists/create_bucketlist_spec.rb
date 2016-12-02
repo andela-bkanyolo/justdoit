@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Create a bucketlist', type: :request do
   let(:user) { create(:user) }
   let(:params) { attributes_for(:bucketlist, user: user) }
-  let(:header) { auth_headers(user) }
+  let(:header) { valid_headers(user) }
 
   let!(:request) {
     post '/bucketlists', params: params, headers: header
@@ -33,5 +33,5 @@ RSpec.describe 'Create a bucketlist', type: :request do
     )
   end
 
-  it_behaves_like 'an unathorized response'
+  include_context 'when authorization token is not included'
 end

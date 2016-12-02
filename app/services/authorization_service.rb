@@ -22,8 +22,8 @@ class AuthorizationService
   end
 
   def http_auth_header
-    auth_headers = headers.fetch("Authorization")
-    return auth_headers.split(" ").last
+    valid_headers = headers.fetch("Authorization")
+    return valid_headers.split(" ").last
   rescue KeyError, NameError
     raise(ExceptionHandler::NotAuthorized, Messages.missing_token)
   end
