@@ -17,6 +17,11 @@ module Api
         render_json(@bucketlist)
       end
 
+      def update
+        @bucketlist.update!(bucketlist_params)
+        render_json(@bucketlist)
+      end
+
       private
 
       def bucketlist_params
