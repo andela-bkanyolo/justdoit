@@ -30,7 +30,7 @@ RSpec.describe AuthenticationController, type: :controller do
   describe 'GET #logout', type: :request do
     context 'when authorization token is included' do
       let(:user) { create(:user) }
-      let(:header) { auth_headers(user) }
+      let(:header) { valid_headers(user) }
 
       before(:each) do
         get '/auth/logout', headers: header

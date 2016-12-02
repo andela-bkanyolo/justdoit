@@ -4,7 +4,7 @@ RSpec.describe 'Show a bucketlist', type: :request do
   let!(:user) { create(:user) }
   let!(:bucket) { create(:bucketlist, user: user) }
   let(:id) { bucket.id }
-  let(:header) { auth_headers(user) }
+  let(:header) { valid_headers(user) }
 
   let!(:request) { get "/bucketlists/#{id}", params: {}, headers: header }
   subject { response }

@@ -4,7 +4,7 @@ RSpec.describe 'Update a bucketlist', type: :request do
   let!(:user) { create(:user) }
   let!(:bucket) { create(:bucketlist, name: 'Old Name', user: user) }
   let(:id) { bucket.id }
-  let(:header) { auth_headers(user) }
+  let(:header) { valid_headers(user) }
   let(:params) { { name: 'New Name' } }
 
   let!(:request) { put "/bucketlists/#{id}", params: params, headers: header }

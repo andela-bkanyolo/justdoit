@@ -4,7 +4,7 @@ RSpec.describe 'Create an item', type: :request do
   let!(:user) { create(:user) }
   let!(:bucket) { create(:bucketlist, user: user) }
   let(:params) { attributes_for(:item, bucketlist: bucket) }
-  let(:header) { auth_headers(user) }
+  let(:header) { valid_headers(user) }
 
   let!(:request) do
     post "/bucketlists/#{bucket.id}/items", params: params, headers: header

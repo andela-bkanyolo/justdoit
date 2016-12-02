@@ -9,6 +9,6 @@ RSpec.shared_examples 'a http response' do |status, message = nil|
 end
 
 RSpec.shared_examples 'an unathorized response' do
-  let(:header) { invalid_auth_headers }
+  let(:header) { invalid_headers }
   it_behaves_like 'a http response', 401, Messages.missing_token
 end
