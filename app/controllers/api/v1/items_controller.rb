@@ -38,6 +38,7 @@ module Api
 
       def set_item
         @item = @items.find(params[:id])
+
       rescue ActiveRecord::RecordNotFound => e
         raise e, Messages.resource_not_found('item')
       end
@@ -48,6 +49,7 @@ module Api
 
       def get_bucket_list
         current_user.bucketlists.find(params[:bucketlist_id])
+        
       rescue ActiveRecord::RecordNotFound => e
         raise e, Messages.resource_not_found('bucketlist')
       end

@@ -6,6 +6,7 @@ class AuthenticationService
   def signup
     user = User.create!(@user_details)
     login(user)
+    
   rescue ActiveRecord::RecordInvalid
     raise
   end
