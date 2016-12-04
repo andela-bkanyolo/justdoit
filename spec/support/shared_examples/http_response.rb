@@ -3,7 +3,7 @@ RSpec.shared_examples 'a http response' do |status, message = nil|
     expect(response.status).to eq(status)
   end
 
-  it 'returns corresponding message' do
+  it 'returns a message' do
     expect(json['message']).to eq(message)
   end if message
 end

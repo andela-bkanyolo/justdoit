@@ -5,10 +5,9 @@
 
 # JUSTDOIT
 
-
 **Documentation** - [justdoit-api.herokuapp.com](http://justdoit-api.herokuapp.com).
 
-**Source code** - [https://github.com/andela-bkanyolo/justdoit](https://github.com/andela-bkanyolo/justdoit).
+**Source code** - [https://github.com/andela-bkanyolo/justdoit](https://github.com/andela-bkanyolo/justdoit)
 
 # Running the application
 
@@ -51,21 +50,21 @@ $ rails s
 To test the application;
 
 ```
-$ rspec -fd
+$ rspec
 ```
 
-# Description
-
-**Justdoit** is a restful and versioned API and all interactions will be defined using basic HTTP verbs.
-
-### API limitations
+# API limitations
 
 It returns JSON only
 
-## The API Endpoints
+# The API Endpoints
 
-POST /bucketlists/ | Create a new bucket list
+Endpoint | Action
 -----|-------
+POST /signup/ | Create a new user
+POST /auth/login/ | Log in existing user
+GET /auth/logout/ | Log out existing user
+POST /bucketlists/ | Create a new bucket list
 GET /bucketlists/ | List all the created bucket lists
 GET /bucketlists/{id} | Get single bucket list
 PUT /bucketlists/{id} | Update this bucket list
@@ -75,3 +74,11 @@ GET /bucketlists/{bucket_id}/items | List all the created items in a bucket list
 GET /bucketlists/{bucket_id}/items/{id} | Get a single item in a bucket list
 PUT /bucketlists/{bucket_id}/items/{item_id} | Update a bucket list item
 DELETE /bucketlists/{bucket_id}/items/{item_id} | Delete an item in a bucket list
+
+# Contributing
+
+1. Fork it!
+2. Create your branch: `git checkout -b ft-awesome`
+3. Commit your changes:
+4. Push to the branch: `git push origin ft-awesome`
+5. Submit a pull request
